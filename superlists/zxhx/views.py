@@ -56,9 +56,9 @@ def sendLableTask(request):
     result = zsy_interface.zsy_sendlabeltask(request.POST['examId'], request.POST['examName'], request.POST['type'], request.POST['status'], request.session['cookies'])
     examList,cookies = zsy_interface.zsy_print(request.session,'')
     if 'success' in result or '试题标注任务创建成功' in result:
-    	errorInfo = '发送标注成功'
+        errorInfo = '发送标注成功'
     else:
-    	errorInfo = result
+        errorInfo = result
     CoachLog.objects.create(coach_name=request.session['userName'], interface_id=3)
     return render(request, 'examlist.html', {'examList': examList, 'errorInfo': errorInfo, 'pageNum': '1'})
 
