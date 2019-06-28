@@ -1,0 +1,30 @@
+{% extends 'xgdbase.html' %}
+
+{% block ieTitle %}范文考试列表{% endblock %}
+
+{% block mybody %}
+         <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+              <table id="id_exam_table" class="table">
+              	{% for exam in examList %}
+              	  <form action="/zxhx/modelEssay" method="POST" name="form1" target="_parent">
+              	    <tr><td>
+              	    <em style='color:green'>{{ exam.examName }}</em>
+              	    <br>
+              	    科目：{{ exam.subject }}
+              	    <br>
+              	    创建时间：{{ exam.createTime }}
+              	    </td>
+              	    <td><input style='display:none;' name='examGroupId' value='{{ exam.examGroupId }}'>
+              	    <button type='submit' class='btn btn-success btn-sm'">查看范文</button>
+              	    </td></tr>
+              	   {% csrf_token %}
+              	   </form>
+              	{% endfor %}
+              </table>
+              {% if error %}
+              <p>{{ error }}</p>
+              {% endif %}
+          </div>
+        </div>
+{% endblock %}

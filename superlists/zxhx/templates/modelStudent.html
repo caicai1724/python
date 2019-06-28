@@ -1,0 +1,31 @@
+{% extends 'xgdbase.html' %}
+
+{% block ieTitle %}范文考试列表{% endblock %}
+
+{% block mybody %}
+         <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+              <table id="id_student_table" class="table">
+              	<thead>
+                   <tr>
+                   <th>学生姓名</th>
+                   <th>班级</th>
+                   <th>范文图片</th>
+                   </tr>
+                </thead>
+                <tbody>
+              	{% for student in studentList %}
+              	    <tr><td>
+              	    {{ student.realName }}</td>
+              	    <td>
+              	    {{ student.className }}
+              	    </td>
+              	    <td>
+              	    <a href="{{ student.imgUrl }}" target="_blank">图片链接</a>
+              	    </td></tr>
+              	{% endfor %}
+              </tbody>
+              </table>
+          </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>登录-技术支持辅助功能</title>
+        <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="/static/base.css" rel="stylesheet">
+        <script href="/static/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <script href="/static/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <style>
+            #from
+            {
+                background-color: #FFFFFF;
+            }
+            .mycenter
+            {
+                margin-top: 100px;
+                margin-left: auto;
+                margin-right: auto;
+                height: 350px;
+                width: auto;
+                padding: 10%;
+                padding-left: 20%;
+                padding-right: 20%;
+            }
+            .mycenter mysign
+            {
+                width: 440px;
+            }
+            .mycenter input, checkbox, button
+            {
+                margin-top: 2%;
+                margin-left: 5%;
+                margin-right: 5%;
+            }
+            .mycheckbox
+            {
+                margin-top: 10px;
+                margin-left: 40px;
+                margin-bottom: 10px;
+                height: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+    	<form id="from" action="/zxhx/login" method="post">
+    		<div class="mycenter">
+    			<div class="col-lg-11 text-center text-info">
+                <h6>使用学管账号登录</h6>
+                <br>
+          </div>
+          <div class="col-lg-10">
+                  <input type="text" class="form-control" name="username" id="id_username" placeholder="请输入学管账号" required
+                      autofocus />
+              </div>
+              <div class="col-lg-10">
+              </div>
+              <div class="col-lg-10">
+                  <input type="password" class="form-control" name="password" id="id_password" placeholder="请输入密码" required
+                      autofocus />
+                  <p></p>
+              </div>
+              {% if error %}
+                      <div class="form-group has-error">
+                        <span class="help-block">{{ error }}</span>
+                      </div>
+              {% endif %}
+              <div class="col-lg-10">
+                  <button type="submit" class="btn btn-success col-lg-12">登录</button>
+              </div>
+        </div>
+        {% csrf_token %}
+      </form>
+    </body>
+</html>

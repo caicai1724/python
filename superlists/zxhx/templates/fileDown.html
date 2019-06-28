@@ -1,0 +1,26 @@
+{% extends 'xgdbase.html' %}
+
+{% block ieTitle %}下载报表{% endblock %}
+
+{% block body %}
+
+<script type="text/javascript">
+setTimeout(function() {
+    // IE
+    if(document.all) {
+    	document.getElementById("down").click();
+    }
+    // 其它浏览器
+    else {
+    	var e = document.createEvent("MouseEvents");
+    	e.initEvent("click", true, true);
+    	document.getElementById("down").dispatchEvent(e);
+    }
+}, 500)
+</script>
+<p>正在自动下载。。。请稍等</p>
+<p>如果没有自动下载，点击链接:
+<a href='{{ fileUrl }}' download='{{ fileName }}' id="down" onclick="clicked">{{ fileUrl }}</a>
+</p>
+<p>如果还是下载不了，可直接复制下载链接，发给老师，可在电脑上进行下载：</p>
+{% endblock %}

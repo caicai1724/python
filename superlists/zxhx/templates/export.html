@@ -1,0 +1,49 @@
+{% extends 'xgdbase.html' %}
+
+{% block ieTitle %}导出报告{% endblock %}
+
+{% block mybody %}
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+              <table id="id_exam_table" class="table">
+              	{% for exam in examList %}
+              	  <form action="/zxhx/SetReport" method="POST" name="form1">
+              	    <tr><td>
+              	    <em style='color:green'>{{ exam.examName }}</em>
+              	    <em style='color:red'>{{ exam.isNew }}</em>
+              	    <br>
+              	    试卷类别：{{ exam.examType }}
+              	    <br>
+              	    班级：{{ exam.examClass }}
+              	    </td>
+              	    <input style='display:none;' name='examId' value='{{ exam.examId }}'>
+              	    <td>
+              	    <button type='submit' class='btn btn-success btn-sm' name='word'>下载word</button>
+              	    <br>
+              	    <button type='submit' class='btn btn-success btn-sm' name='excel'>下载excel</button>
+              	    </td></tr>
+              	   {% csrf_token %}
+              	   </form>
+              	{% endfor %}
+              </table>
+          </div>
+        </div>
+        <div id="divcss5">
+          <ul class="pagination">
+             <li class="page-item" id="bpage"><a class="page-link" href="/zxhx/export/page/" id="beforepage">上一页</a></li>
+             <li class="page-item"><a class="page-link" href="/zxhx/export/page/" id="nextpage">下一页</a></li>
+          </ul>
+        </div>
+        <script type=text/javascript>
+      	  var pageN = {{ pageNum|safe }};
+      	  var pageB = pageN - 1;
+      	  var pageE = pageN + 1;
+      	  var bp = document.getElementById("beforepage");
+      	  var np = document.getElementById("nextpage");
+      	  bp.href = bp.href.concat(String(pageB));
+      	  np.href = np.href.concat(String(pageE));
+      	  if (pageN == 1){
+      	    document.getElementById("bpage").className = "page-item disabled"
+      	  }
+        </script>
+{% endblock %}

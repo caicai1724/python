@@ -1,0 +1,108 @@
+{% extends 'Headbase.html' %}
+
+{% block ieTitle %}首页-技术支持{% endblock %}
+
+{% block body %}
+<div class="container">
+	<br>
+	<p><em style='color:green'>手机使用学管端功能---------></em><a href="/zxhx">登录入口</a>
+    <br>
+    如果是安卓手机，请使用手机的浏览器打开登录入口链接（http://52.69.209.169:8090/zxhx）
+	<br>
+	包含如下功能：
+	<br>
+    1. 发送标注（数学的系统考试）
+    <br>
+    2. 下载报告（数学学科）
+     <br>
+    3. 查看范文（英语和语文科目）
+  </p>
+  <p style = "display:none" id="playwindow" align="right">
+  <em style='color:green'>如果播放清晰度不够，可设置成"超清"播放</em>
+  <button onclick="playClose()" class='btn btn-success btn-sm'>关闭播放窗口</button>
+  </p>
+  <iframe height=0 width=1000 src='' frameborder=0 allow="autoplay; encrypted-media" allowfullscreen="true" controls="controls"></iframe>
+  <script>
+  	function playOnLine(playUrl)
+  	{
+  	   window.scrollTo(0,0);
+  	   document.getElementsByTagName('iframe')[0].src = playUrl;
+  	   document.getElementsByTagName('iframe')[0].height= 500;
+  	   document.getElementById('playwindow').style = "";
+  	}
+  	function playClose()
+  	{
+  	   document.getElementsByTagName('iframe')[0].height= 0;
+  	   document.getElementById('playwindow').style = "display:none";
+  	}
+  </script>
+  <br>
+  <em style='color:green'>知心慧学产品</em>
+  	<table class="table table-hover">
+       <thead class="table-active">
+         <tr>
+           <th>产品名称</th>
+           <th>下载链接或二维码</th>
+           <th>备注</th>
+         </tr>
+       </thead>
+       <tbody>
+       	 {% for product in zxhxPro %}
+         <tr>
+           <td>{{ product.name }}</td>
+           <td>{{ product.downUrl|safe }}</td>
+           <td>{{ product.info|safe }}</td>
+         </tr>
+         {% endfor %}
+       </tbody>
+    </table>
+  <em style='color:green'>培训视频和文档</em>
+  	<table class="table table-hover">
+       <thead class="table-active">
+         <tr>
+           <th width="20%">资源名称</th>
+           <th width="10%">资源类型</th>
+           <th width="10%">在线播放</th>
+           <th width="30%">下载链接</th>
+           <th width="30%">内容简介</th>
+         </tr>
+       </thead>
+       <tbody>
+       	 {% for file in trainFile %}
+       	 <tr>
+           <td>{{ file.name }}</td>
+           <td>{{ file.type_id.name }}</td>
+           <td>
+              {% if file.playUrl %}
+           	      <button onclick="playOnLine('{{ file.playUrl|safe }}')" class='btn btn-success btn-sm'>在线播放</button></td>
+           	  {% endif %}
+           <td>{{ file.downUrl|safe }}&nbsp;提取码：{{ file.extracted_code }}</td>
+           <td>{{ file.info|safe }}</td>
+         </tr>
+         {% endfor %}
+       </tbody>
+    </table>
+  <em style='color:green'>工具类下载</em>
+  	<table class="table table-hover">
+       <thead class="table-active">
+         <tr>
+           <th>工具名称</th>
+           <th>来源</th>
+           <th>下载链接</th>
+           <th>内容简介</th>
+         </tr>
+       </thead>
+       <tbody>
+       	 {% for t in tool %}
+       	 <tr>
+           <td>{{ t.name }}</td>
+           <td>{{ t.source|safe }}</td>
+           <td>{{ t.downUrl|safe }}</td>
+           <td>{{ t.info|safe }}</td>
+         </tr>
+         {% endfor %}
+       </tbody>
+    </table>
+</div>
+
+{% endblock %}

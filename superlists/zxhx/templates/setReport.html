@@ -1,0 +1,35 @@
+{% extends 'xgdbase.html' %}
+
+{% block ieTitle %}导出报告{% endblock %}
+
+{% block mybody %}
+<form action="/zxhx/downReport" method="POST" name="form1" target="_blank">
+    <label for="name">下载的学情分析报告是否需要下列数据:</label>
+    <div>
+    	<label class="checkbox-inline">
+    		<input type="checkbox" name="reportData[]" value="studentCard"> 系统准考证号
+    	</label>
+    	<label class="checkbox-inline">
+    		<input type="checkbox" name="reportData[]" value="schoolStudentCard"> 学校准考证号
+    	</label>
+    	<label class="checkbox-inline">
+    		<input type="checkbox" name="reportData[]" value="isOuter"> 只显示在籍生
+    	</label>
+    	<label class="checkbox-inline">
+    		<input type="checkbox" name="reportData[]" value="idNumber"> 身份证
+    	</label>
+      <button type='submit' class='btn btn-success btn-sm'>确定下载</button>
+      <input style='display:none;' name='examId' value='{{ examId }}'>
+      <input style='display:none;' name='fileType' value='{{ fileType }}'>
+    </div>
+{% csrf_token %}
+</form>
+<br>
+<p>
+	请注意，如果是苹果手机下载文档，会直接在浏览器里打开。
+	可选择存储到“文件”来保存文件。如下图所示
+</p>
+<img src="/static/downImg_1.png" alt="点击图标1" width="300" height="50"/>
+<p> </p>
+<img src="/static/downImg_2.png" alt="点击存储到文件" width="300" height="150"/>
+{% endblock %}
